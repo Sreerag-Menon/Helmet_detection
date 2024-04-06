@@ -7,13 +7,15 @@ import os
 import sys
 import cv2
 import numpy as np
-import tensorflow as tf
+
 from utils import label_map_util
 from utils import visualization_utils as vis_util
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 
 
 
-def detection(helmet_inference_path, frozen_graph_path, labelmap, number_of_classes, input):
+def detection(helmet_inference_path, frozen_graph_path, labelmap, number_of_classes, folder_path):
 
     detection_graph = tf.Graph()
     # Name of the directory containing the object detection module we're using
@@ -65,14 +67,15 @@ def detection(helmet_inference_path, frozen_graph_path, labelmap, number_of_clas
 
     # Number of objects detected
     num_detections = detection_graph.get_tensor_by_name('num_detections:0')
-    img = input
+    #img = input
+    #print(img)
 
     # Load the Tensorflow model into memory.
     # Load image using OpenCV and
     # expand image dimensions to have shape: [1, None, None, 3]
     # i.e. a single-column array, where each item in the column has the pixel RGB value
     sess = tf.Session(graph=detection_graph)
-    image = cv2.imread(img)
+    image = cv2.imread(folder_path)
     image = cv2.resize(image, (1080, 1080))
     image_expanded = np.expand_dims(image, axis=0)
     # Perform the actual detection by running the model with the image as input
