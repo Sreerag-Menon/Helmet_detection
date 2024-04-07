@@ -81,7 +81,7 @@ cd Motorbike-Helmet_detection-using-YOLOV3
 ```
 
 
-3. Create a Python 3.6 version of  virtual environment named 'motorbike' and activate it
+3. Create a Python 3.9 version of  virtual environment named 'motorbike' and activate it
 
 ```
 pip install virtualenv
